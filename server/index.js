@@ -9,6 +9,7 @@ const { recoverKey, signatureVerified, getAddress } = require("./scripts/utils")
 app.use(cors());
 app.use(express.json());
 
+// Test Addresses
 const balances = {
   "0x432a80460acd02ca4baf2ea33d4b36ce053f5201": 100,
   "0xfb1064895dd39d82b5cdb8cf482bf9157af8e580": 50,
