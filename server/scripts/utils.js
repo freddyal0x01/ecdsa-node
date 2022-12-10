@@ -1,28 +1,10 @@
 const secp = require("ethereum-cryptography/secp256k1");
-const { toHex, utf8ToBytes } = require("ethereum-cryptography/utils");
-const keccak256 = require("ethereum-cryptography/keccak");
+const { toHex } = require("ethereum-cryptography/utils");
+const { keccak256 } = require("ethereum-cryptography/keccak");
 
 
-// TODO: Generate a signature, nonce, and recovery bit
-// Done: 12-7-2022
-
-function hashMessage(message) {
-    let bytes = utf8ToBytes(message);
-    let hash = keccak256(bytes);
-    return hash;
-}
-
-async function signMessage(message) {
-    const hash = hashMessage(message);
-    const signature = await secp.sign(hash, privKey, options ={
-        recovered: true
-    })
-    return signature;
-}
-
-async function recoverKey(message, signature, recoveryBit) {
-    const hash = hashMessage(message);
-    const publicKey = secp.recoverPublicKey(hash, signature, recoveryBit);
+function recoverKey(message, signature, recoveryBit) {
+    const publicKey = secp.recoverPublicKey(message, signature, recoveryBit);
     return publicKey;
 }
 
@@ -39,4 +21,4 @@ function getAddress(publicKey) {
     return hexEthAddress;
 }
 
-module.exports = hashMessage, signMessage, recoverKey, signatureVerified, getAddress;
+module.exports = { recoverKey, signatureVerified, getAddress };

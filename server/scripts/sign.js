@@ -2,9 +2,7 @@ const secp = require("ethereum-cryptography/secp256k1");
 const { toHex } = require("ethereum-cryptography/utils");
 
 async function signMessage(message, privateKey) {
-    const signature = await secp.sign(message, privateKey, options = {
-        recovered: true
-    });
+    const signature = await secp.sign(message, privateKey, { recovered: true });
     return signature;
 }
 
